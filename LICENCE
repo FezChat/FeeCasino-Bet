@@ -1,0 +1,20 @@
+
+## Important Notes
+
+1. **This is a complete mock application** - All money is fake, all transactions are simulated
+2. **Supabase integration** - Uses the provided Supabase project for data storage
+3. **Aviator game** - Fully functional with realistic mechanics
+4. **Multi-currency support** - Detects user locale and supports 50+ currencies
+5. **Responsive design** - Works on desktop and mobile devices
+6. **Sound effects** - Browser-based sounds with fallback
+7. **Complete UI/UX** - Looks and feels like a commercial betting app
+
+## To Run the Application:
+
+1. Save all files in the described structure
+2. Run the SQL schema in your Supabase project
+3. Update the Supabase URL and key in the API files if needed
+4. Open `index.html` in a modern web browser
+5. The app will work even without Supabase (fallback to localStorage)
+
+**Remember**: This is for demonstration/entertainment only. Never use for real money gambling.

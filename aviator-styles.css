@@ -1,0 +1,566 @@
+/* aviator-styles.css */
+
+/* Aviator Container */
+.aviator-container {
+    display: grid;
+    grid-template-columns: 300px 1fr 300px;
+    gap: 1.5rem;
+    padding: 2rem;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* Game Stats Panel */
+.game-stats-panel {
+    padding: 1.5rem;
+    border-radius: 20px;
+}
+
+.stats-grid.mini {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.stat-card .stat-value {
+    font-size: 1.8rem;
+}
+
+.history-section {
+    margin-top: 2rem;
+}
+
+.history-list {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-top: 1rem;
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.history-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateX(5px);
+}
+
+.history-multiplier {
+    font-weight: 700;
+    color: var(--success);
+}
+
+.history-multiplier.loss {
+    color: var(--danger);
+}
+
+.history-time {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+}
+
+/* Main Game Panel */
+.main-game-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.game-display {
+    border-radius: 25px;
+    padding: 2rem;
+    position: relative;
+    min-height: 400px;
+    overflow: hidden;
+}
+
+.multiplier-display {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.multiplier-text {
+    font-size: 4rem;
+    font-weight: 800;
+    background: linear-gradient(to right, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(26, 140, 255, 0.3);
+}
+
+.multiplier-label {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 0.5rem;
+}
+
+/* Airplane Track */
+.airplane-track {
+    height: 150px;
+    background: linear-gradient(90deg, 
+        rgba(26, 140, 255, 0.1) 0%,
+        rgba(0, 212, 170, 0.1) 50%,
+        rgba(239, 68, 68, 0.1) 100%);
+    border-radius: 15px;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.airplane {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 3rem;
+    color: var(--primary);
+    transition: left 0.1s linear;
+    z-index: 10;
+    animation: airplaneFloat 3s ease-in-out infinite;
+}
+
+@keyframes airplaneFloat {
+    0%, 100% { transform: translateY(-50%) rotate(0deg); }
+    50% { transform: translateY(-55%) rotate(-2deg); }
+}
+
+.multiplier-markers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.marker {
+    position: absolute;
+    height: 100%;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.marker-label {
+    position: absolute;
+    top: 10px;
+    transform: translateX(-50%);
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* Timer Display */
+.timer-display {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.timer {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+}
+
+/* Betting Controls */
+.betting-controls {
+    padding: 2rem;
+    border-radius: 20px;
+}
+
+.bet-amount-section,
+.auto-cashout-section {
+    margin-bottom: 2rem;
+}
+
+.bet-amount-section h3,
+.auto-cashout-section h3 {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quick-bet-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.bet-btn {
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-light);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.bet-btn:hover,
+.bet-btn.active {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    transform: translateY(-2px);
+}
+
+.bet-input-group {
+    position: relative;
+    margin-top: 1rem;
+}
+
+.bet-input {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: var(--text-light);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.currency {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-dim);
+    font-weight: 600;
+}
+
+.auto-cashout-input {
+    position: relative;
+    margin-top: 1rem;
+}
+
+.cashout-input {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+.multiplier-label {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.quick-multipliers {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.multiplier-btn {
+    padding: 0.5rem 1rem;
+    background: rgba(0, 212, 170, 0.1);
+    border: 1px solid rgba(0, 212, 170, 0.2);
+    color: var(--accent);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.multiplier-btn:hover {
+    background: rgba(0, 212, 170, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.action-buttons button {
+    flex: 1;
+    padding: 1.5rem;
+    border: none;
+    border-radius: 15px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.place-bet-btn {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+}
+
+.place-bet-btn:hover {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    box-shadow: 0 10px 20px rgba(26, 140, 255, 0.3);
+    transform: translateY(-5px);
+}
+
+.cashout-btn {
+    background: linear-gradient(135deg, var(--success), #0da374);
+    color: white;
+}
+
+.cashout-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #0da374, var(--success));
+    box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+    transform: translateY(-5px);
+}
+
+.cashout-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.repeat-bet-btn {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-light);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.repeat-bet-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-5px);
+}
+
+.action-buttons button span {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+/* Side Panel */
+.side-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.active-bets-section,
+.chat-section {
+    padding: 1.5rem;
+    border-radius: 20px;
+}
+
+.bets-list {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-top: 1rem;
+}
+
+.bet-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+    align-items: center;
+}
+
+.bet-player {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.bet-player-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.bet-details {
+    text-align: right;
+}
+
+.bet-amount {
+    font-weight: 600;
+    color: var(--accent);
+}
+
+.bet-multiplier {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+}
+
+/* Chat Section */
+.chat-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    margin: 1rem 0;
+    padding-right: 0.5rem;
+}
+
+.chat-message {
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+}
+
+.chat-user {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.3rem;
+}
+
+.chat-user-avatar {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+}
+
+.chat-user-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.chat-time {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+}
+
+.chat-text {
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.chat-input {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: auto;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: var(--text-light);
+}
+
+.chat-input button {
+    padding: 0.8rem 1.5rem;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Recent Winners */
+.recent-winners {
+    margin: 2rem auto;
+    max-width: 1600px;
+    padding: 2rem;
+    border-radius: 20px;
+}
+
+.winners-scroll {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding: 1rem 0;
+    scrollbar-width: thin;
+}
+
+.winner-item {
+    min-width: 200px;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.winner-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-5px);
+}
+
+.winner-avatar-large {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    border: 3px solid var(--accent);
+}
+
+.winner-name {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.winner-win {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+/* Sound Toggle */
+.sound-toggle {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1000;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .aviator-container {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+    
+    .side-panel {
+        grid-row: 1;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) {
+    .multiplier-text {
+        font-size: 3rem;
+    }
+    
+    .timer {
+        font-size: 2rem;
+    }
+    
+    .airplane {
+        font-size: 2rem;
+    }
+}

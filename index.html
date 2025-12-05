@@ -6,300 +6,387 @@
     <title>FeeCasino Bet - Dashboard</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Header -->
-    <header>
+    <header class="header glass">
         <div class="logo">
-            <i class="fas fa-dice" style="color: var(--primary-green); font-size: 2rem;"></i>
+            <div class="logo-icon">
+                <i class="fas fa-dice" style="color: white; font-size: 1.5rem;"></i>
+            </div>
             <h1>FeeCasino Bet</h1>
         </div>
         
-        <div class="user-section">
+        <div class="user-profile">
             <div class="balance-card">
-                <small>Balance</small>
-                <div class="amount" id="userBalance">0 TZS</div>
+                <small>BALANCE</small>
+                <div class="amount" id="userBalance">100,000 TZS</div>
             </div>
-            
-            <img id="userAvatar" src="" alt="Avatar" class="avatar">
-            <button onclick="openSettings()" class="settings-btn">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=casino" class="avatar" alt="Avatar" id="userAvatar">
+            <button class="action-btn" onclick="openSettings()">
                 <i class="fas fa-cog"></i>
+                Settings
             </button>
         </div>
     </header>
-    
+
     <!-- Navigation -->
-    <nav>
-        <ul class="nav-links">
-            <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+    <nav class="nav-container glass">
+        <ul class="nav-tabs">
+            <li><a href="index.html" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
             <li><a href="aviator.html"><i class="fas fa-plane"></i> Aviator</a></li>
-            <li><a href="#"><i class="fas fa-gamepad"></i> Slots</a></li>
-            <li><a href="#"><i class="fas fa-dice"></i> Live Casino</a></li>
+            <li><a href="#"><i class="fas fa-dice"></i> Slots</a></li>
+            <li><a href="#"><i class="fas fa-cards"></i> Live Casino</a></li>
             <li><a href="#"><i class="fas fa-trophy"></i> Tournaments</a></li>
+            <li><a href="#"><i class="fas fa-history"></i> History</a></li>
+            <li><a href="#"><i class="fas fa-wallet"></i> Wallet</a></li>
         </ul>
     </nav>
-    
+
     <!-- Main Content -->
-    <main>
-        <section class="quick-actions">
-            <h2><i class="fas fa-bolt"></i> Quick Actions</h2>
-            <div class="action-buttons">
-                <button onclick="openDeposit()" class="action-btn">
-                    <i class="fas fa-plus-circle"></i> Deposit
-                </button>
-                <button onclick="openWithdraw()" class="action-btn">
-                    <i class="fas fa-minus-circle"></i> Withdraw
-                </button>
-                <button onclick="openNotifications()" class="action-btn">
-                    <i class="fas fa-bell"></i> Notifications
-                    <span id="notificationBadge" class="badge">0</span>
-                </button>
-                <button onclick="toggleTheme()" class="action-btn">
-                    <i class="fas fa-moon"></i> Theme
-                </button>
-            </div>
-        </section>
-        
-        <section class="live-stats">
+    <main class="main-container">
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <button class="action-btn deposit" onclick="openDeposit()">
+                <i class="fas fa-plus-circle"></i>
+                Deposit
+            </button>
+            <button class="action-btn withdraw" onclick="openWithdraw()">
+                <i class="fas fa-minus-circle"></i>
+                Withdraw
+            </button>
+            <button class="action-btn notify" onclick="openNotifications()">
+                <i class="fas fa-bell"></i>
+                Notifications
+                <span class="badge" id="notificationBadge">3</span>
+            </button>
+            <button class="action-btn theme" onclick="toggleTheme()">
+                <i class="fas fa-moon"></i>
+                Dark Mode
+            </button>
+        </div>
+
+        <!-- Stats Overview -->
+        <section class="stats-overview">
             <h2><i class="fas fa-chart-line"></i> Live Statistics</h2>
             <div class="stats-grid">
-                <div class="stat-card">
-                    <h3>Active Players</h3>
+                <div class="stat-card glass">
+                    <div class="stat-header">
+                        <h3>Active Players</h3>
+                        <div class="stat-icon players">
+                            <i class="fas fa-users"></i>
+                        </div>
+                    </div>
                     <div class="stat-value" id="activePlayers">1,247</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>12% today</span>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <h3>Total Bets Today</h3>
-                    <div class="stat-value" id="totalBets">4,892</div>
+                
+                <div class="stat-card glass">
+                    <div class="stat-header">
+                        <h3>Total Bets</h3>
+                        <div class="stat-icon bets">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value" id="totalBets">245,820 TZS</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>8% today</span>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <h3>Big Win</h3>
+                
+                <div class="stat-card glass">
+                    <div class="stat-header">
+                        <h3>Big Win Today</h3>
+                        <div class="stat-icon wins">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                    </div>
                     <div class="stat-value" id="bigWin">500,000 TZS</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>New record!</span>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <h3>Online Now</h3>
+                
+                <div class="stat-card glass">
+                    <div class="stat-header">
+                        <h3>Online Now</h3>
+                        <div class="stat-icon online">
+                            <i class="fas fa-signal"></i>
+                        </div>
+                    </div>
                     <div class="stat-value" id="onlineNow">843</div>
+                    <div class="stat-change negative">
+                        <i class="fas fa-arrow-down"></i>
+                        <span>2% less</span>
+                    </div>
                 </div>
             </div>
         </section>
-        
-        <section class="featured-games">
+
+        <!-- Featured Games -->
+        <section class="games-section">
             <h2><i class="fas fa-fire"></i> Featured Games</h2>
             <div class="games-grid">
-                <div class="game-card">
-                    <img src="https://images.unsplash.com/photo-1635315563254-a18ad757f0d3?w=400&h=180&fit=crop" alt="Aviator">
-                    <div class="game-info">
+                <!-- Aviator Game -->
+                <div class="game-card glass">
+                    <div class="game-badge">HOT</div>
+                    <img src="https://images.unsplash.com/photo-1635315563254-a18ad757f0d3?w=600&h=300&fit=crop" alt="Aviator" class="game-image">
+                    <div class="game-content">
                         <h3>Aviator</h3>
-                        <p>Predict when the plane will fly away. Multiply your bet!</p>
-                        <button onclick="window.location.href='aviator.html'" class="play-btn">
-                            <i class="fas fa-play"></i> Play Now
+                        <p>Predict when the plane will fly away. Multiply your bet in this exciting real-time game!</p>
+                        <button class="play-btn" onclick="window.location.href='aviator.html'">
+                            <i class="fas fa-play"></i>
+                            Play Now
                         </button>
                     </div>
                 </div>
                 
-                <div class="game-card">
-                    <img src="https://images.unsplash.com/photo-1614732414444-096e5f1122d5?w=400&h=180&fit=crop" alt="Slots">
-                    <div class="game-info">
+                <!-- Slots -->
+                <div class="game-card glass">
+                    <div class="game-badge">POPULAR</div>
+                    <img src="https://images.unsplash.com/photo-1614732414444-096e5f1122d5?w=600&h=300&fit=crop" alt="Slots" class="game-image">
+                    <div class="game-content">
                         <h3>Mega Slots</h3>
-                        <p>Spin and win big with our progressive jackpot slots</p>
-                        <button class="play-btn">
-                            <i class="fas fa-play"></i> Coming Soon
+                        <p>Spin the reels and win big with progressive jackpots and exciting bonus features.</p>
+                        <button class="play-btn" onclick="showComingSoon()">
+                            <i class="fas fa-play"></i>
+                            Coming Soon
                         </button>
                     </div>
                 </div>
                 
-                <div class="game-card">
-                    <img src="https://images.unsplash.com/photo-1568430462989-44163eb1752f?w=400&h=180&fit=crop" alt="Blackjack">
-                    <div class="game-info">
+                <!-- Blackjack -->
+                <div class="game-card glass">
+                    <img src="https://images.unsplash.com/photo-1568430462989-44163eb1752f?w=600&h=300&fit=crop" alt="Blackjack" class="game-image">
+                    <div class="game-content">
                         <h3>Blackjack</h3>
-                        <p>Beat the dealer in this classic card game</p>
-                        <button class="play-btn">
-                            <i class="fas fa-play"></i> Coming Soon
+                        <p>Beat the dealer in this classic card game. Perfect strategy and luck required!</p>
+                        <button class="play-btn" onclick="showComingSoon()">
+                            <i class="fas fa-play"></i>
+                            Coming Soon
                         </button>
                     </div>
                 </div>
             </div>
         </section>
-        
-        <section class="recent-winners">
+
+        <!-- Recent Winners -->
+        <section class="winners-section">
             <h2><i class="fas fa-trophy"></i> Recent Winners</h2>
-            <div class="winners-list" id="winnersList">
-                <!-- Filled by JavaScript -->
+            <div class="winners-grid">
+                <div class="winner-card glass">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=winner1" alt="Winner" class="winner-avatar">
+                    <div class="winner-info">
+                        <h4>Player_***23</h4>
+                        <small>Aviator • Just now</small>
+                    </div>
+                    <div class="win-amount">150,000 TZS</div>
+                </div>
+                
+                <div class="winner-card glass">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=winner2" alt="Winner" class="winner-avatar">
+                    <div class="winner-info">
+                        <h4>Lucky_***88</h4>
+                        <small>Slots • 5 min ago</small>
+                    </div>
+                    <div class="win-amount">75,000 TZS</div>
+                </div>
+                
+                <div class="winner-card glass">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=winner3" alt="Winner" class="winner-avatar">
+                    <div class="winner-info">
+                        <h4>Win_***45</h4>
+                        <small>Aviator • 10 min ago</small>
+                    </div>
+                    <div class="win-amount">250,000 TZS</div>
+                </div>
+                
+                <div class="winner-card glass">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=winner4" alt="Winner" class="winner-avatar">
+                    <div class="winner-info">
+                        <h4>Bet_***12</h4>
+                        <small>Blackjack • 15 min ago</small>
+                    </div>
+                    <div class="win-amount">50,000 TZS</div>
+                </div>
             </div>
         </section>
     </main>
-    
+
     <!-- Footer -->
-    <footer>
+    <footer class="footer">
         <div class="social-links">
-            <a href="https://wa.me/255752593977">
+            <a href="https://wa.me/255752593977" class="social-link" target="_blank">
                 <i class="fab fa-whatsapp"></i> WhatsApp
             </a>
-            <a href="https://www.instagram.com/@frediezra">
+            <a href="https://www.instagram.com/@frediezra" class="social-link" target="_blank">
                 <i class="fab fa-instagram"></i> Instagram
             </a>
-            <a href="https://www.facebook.com/@FrediEzra">
+            <a href="https://www.facebook.com/@FrediEzra" class="social-link" target="_blank">
                 <i class="fab fa-facebook"></i> Facebook
             </a>
-            <a href="https://whatsapp.com/channel/0029VaihcQv84Om8LP59fO3f">
+            <a href="https://whatsapp.com/channel/0029VaihcQv84Om8LP59fO3f" class="social-link" target="_blank">
                 <i class="fab fa-whatsapp"></i> WhatsApp Channel
             </a>
-            <a href="https://chat.whatsapp.com/KERPI5K0w0L9rzU00QSw40">
+            <a href="https://chat.whatsapp.com/KERPI5K0w0L9rzU00QSw40" class="social-link" target="_blank">
                 <i class="fab fa-whatsapp"></i> WhatsApp Group
             </a>
-            <a href="https://thread.com/@frediezra">
+            <a href="https://thread.com/@frediezra" class="social-link" target="_blank">
                 <i class="fab fa-threads"></i> Threads
             </a>
-            <a href="https://twitter.com/@frediezra">
+            <a href="https://twitter.com/@frediezra" class="social-link" target="_blank">
                 <i class="fab fa-twitter"></i> Twitter/X
             </a>
-            <a href="https://tiktok.com/frediezra1">
+            <a href="https://tiktok.com/frediezra1" class="social-link" target="_blank">
                 <i class="fab fa-tiktok"></i> TikTok
             </a>
-            <a href="https://youtube.com/FrediAi-tech">
+            <a href="https://youtube.com/FrediAi-tech" class="social-link" target="_blank">
                 <i class="fab fa-youtube"></i> YouTube
             </a>
         </div>
-        
         <div class="copyright">
             <p>Contact: +255752593977 | Email: support@feecasino.com</p>
             <p>&copy; FeeCasino Bet <span id="copyrightYear"></span>. All rights reserved.</p>
         </div>
     </footer>
-    
+
     <!-- Modals -->
     <div id="depositModal" class="modal">
-        <div class="modal-content">
+        <div class="modal-content glass">
             <div class="modal-header">
-                <h2><i class="fas fa-plus-circle"></i> Deposit</h2>
+                <h2><i class="fas fa-plus-circle"></i> Deposit Funds</h2>
                 <button class="close-btn" onclick="closeModal('depositModal')">&times;</button>
             </div>
-            <div class="form-group">
-                <label>Amount (Min: 100 TZS)</label>
-                <input type="number" id="depositAmount" min="100" placeholder="Enter amount">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Amount (Min: 100 TZS)</label>
+                    <input type="number" id="depositAmount" class="modal-input" min="100" placeholder="Enter amount">
+                </div>
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <select id="depositMethod" class="modal-select">
+                        <option value="mpesa">M-Pesa</option>
+                        <option value="tigopesa">Tigo Pesa</option>
+                        <option value="airtelmoney">Airtel Money</option>
+                        <option value="bank">Bank Transfer</option>
+                    </select>
+                </div>
+                <button class="modal-btn primary" onclick="processDeposit()">
+                    <i class="fas fa-check"></i>
+                    Confirm Deposit
+                </button>
             </div>
-            <button onclick="processDeposit()" class="play-btn">Deposit Now</button>
         </div>
     </div>
-    
+
     <div id="withdrawModal" class="modal">
-        <div class="modal-content">
+        <div class="modal-content glass">
             <div class="modal-header">
-                <h2><i class="fas fa-minus-circle"></i> Withdraw</h2>
+                <h2><i class="fas fa-minus-circle"></i> Withdraw Funds</h2>
                 <button class="close-btn" onclick="closeModal('withdrawModal')">&times;</button>
             </div>
-            <div class="form-group">
-                <label>Amount (Min: 100 TZS)</label>
-                <input type="number" id="withdrawAmount" min="100" placeholder="Enter amount">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Amount (Min: 100 TZS)</label>
+                    <input type="number" id="withdrawAmount" class="modal-input" min="100" placeholder="Enter amount">
+                </div>
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <select id="withdrawMethod" class="modal-select">
+                        <option value="mpesa">M-Pesa</option>
+                        <option value="tigopesa">Tigo Pesa</option>
+                        <option value="airtelmoney">Airtel Money</option>
+                    </select>
+                </div>
+                <button class="modal-btn primary" onclick="processWithdraw()">
+                    <i class="fas fa-check"></i>
+                    Confirm Withdrawal
+                </button>
             </div>
-            <div class="form-group">
-                <label>Payment Method</label>
-                <select id="withdrawMethod">
-                    <option value="mpesa">M-Pesa</option>
-                    <option value="tigopesa">Tigo Pesa</option>
-                    <option value="airtelmoney">Airtel Money</option>
-                </select>
-            </div>
-            <button onclick="processWithdraw()" class="play-btn">Withdraw Now</button>
         </div>
     </div>
-    
+
+    <!-- Settings Modal -->
     <div id="settingsModal" class="modal">
-        <div class="modal-content">
+        <div class="modal-content glass">
             <div class="modal-header">
                 <h2><i class="fas fa-cog"></i> Settings</h2>
                 <button class="close-btn" onclick="closeModal('settingsModal')">&times;</button>
             </div>
-            
-            <div class="form-group">
-                <label>Avatar</label>
-                <div class="avatar-grid">
-                    <div class="avatar-option" onclick="selectAvatar(1)">
-                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=casino1" class="avatar-select">
-                    </div>
-                    <div class="avatar-option" onclick="selectAvatar(2)">
-                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=casino2" class="avatar-select">
-                    </div>
-                    <div class="avatar-option" onclick="selectAvatar(3)">
-                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=casino3" class="avatar-select">
+            <div class="modal-body">
+                <div class="settings-section">
+                    <h3><i class="fas fa-user-circle"></i> Avatar</h3>
+                    <div class="avatar-options">
+                        <div class="avatar-option active" onclick="selectAvatar(1)">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=casino1" alt="Avatar 1">
+                        </div>
+                        <div class="avatar-option" onclick="selectAvatar(2)">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=casino2" alt="Avatar 2">
+                        </div>
+                        <div class="avatar-option" onclick="selectAvatar(3)">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=casino3" alt="Avatar 3">
+                        </div>
+                        <div class="avatar-option" onclick="selectAvatar(4)">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=casino4" alt="Avatar 4">
+                        </div>
                     </div>
                 </div>
+                
+                <div class="settings-section">
+                    <h3><i class="fas fa-palette"></i> Theme</h3>
+                    <select id="themeSelect" class="modal-select" onchange="changeTheme(this.value)">
+                        <option value="dark">Dark Mode</option>
+                        <option value="light">Light Mode</option>
+                        <option value="auto">Auto (System)</option>
+                    </select>
+                </div>
+                
+                <div class="settings-section">
+                    <h3><i class="fas fa-volume-up"></i> Sounds</h3>
+                    <select id="soundSelect" class="modal-select">
+                        <option value="all">All Sounds</option>
+                        <option value="game">Game Sounds Only</option>
+                        <option value="none">No Sounds</option>
+                    </select>
+                </div>
+                
+                <button class="modal-btn primary" onclick="saveSettings()">
+                    <i class="fas fa-save"></i>
+                    Save Settings
+                </button>
+                
+                <button class="modal-btn secondary" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
             </div>
-            
-            <div class="form-group">
-                <label>Theme</label>
-                <select id="themeSelect" onchange="changeTheme(this.value)">
-                    <option value="dark">Dark Mode</option>
-                    <option value="light">Light Mode</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label>Notification Sound</label>
-                <select id="soundSelect">
-                    <option value="on">On</option>
-                    <option value="off">Off</option>
-                </select>
-            </div>
-            
-            <button onclick="saveSettings()" class="play-btn">Save Settings</button>
-            <button onclick="logout()" class="play-btn" style="background: var(--danger); margin-top: 10px;">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </button>
         </div>
     </div>
-    
-    <div id="notificationPanel" class="notification-panel" style="display: none;">
-        <div class="modal-header">
+
+    <!-- Notification Panel -->
+    <div id="notificationPanel" class="notification-panel glass">
+        <div class="panel-header">
             <h3><i class="fas fa-bell"></i> Notifications</h3>
             <button class="close-btn" onclick="closeNotifications()">&times;</button>
         </div>
-        <div id="notificationsList"></div>
+        <div class="panel-body" id="notificationsList">
+            <!-- Notifications will be loaded here -->
+        </div>
     </div>
-    
-    <script type="module" src="app.js"></script>
+
     <script>
         // Set copyright year
         document.getElementById('copyrightYear').textContent = new Date().getFullYear();
         
-        // Update live stats (fake data)
-        setInterval(() => {
-            const activePlayers = Math.floor(Math.random() * 500) + 1000;
-            const totalBets = Math.floor(Math.random() * 1000) + 4000;
-            const onlineNow = Math.floor(Math.random() * 200) + 700;
-            
-            document.getElementById('activePlayers').textContent = activePlayers.toLocaleString();
-            document.getElementById('totalBets').textContent = totalBets.toLocaleString();
-            document.getElementById('onlineNow').textContent = onlineNow.toLocaleString();
-            
-            // Update big win randomly
-            if (Math.random() > 0.7) {
-                const bigWin = Math.floor(Math.random() * 1000000) + 100000;
-                document.getElementById('bigWin').textContent = `${bigWin.toLocaleString()} TZS`;
-            }
-        }, 5000);
-        
-        // Load recent winners
-        function loadRecentWinners() {
-            const winners = [
-                { name: "Player_***23", amount: "150,000 TZS", game: "Aviator" },
-                { name: "Lucky_***88", amount: "75,000 TZS", game: "Slots" },
-                { name: "Win_***45", amount: "250,000 TZS", game: "Aviator" },
-                { name: "Bet_***12", amount: "50,000 TZS", game: "Blackjack" },
-                { name: "Cash_***99", amount: "180,000 TZS", game: "Aviator" }
-            ];
-            
-            const winnersList = document.getElementById('winnersList');
-            winnersList.innerHTML = winners.map(winner => `
-                <div class="winner-item">
-                    <span>${winner.name}</span>
-                    <span class="win-amount">${winner.amount}</span>
-                    <span class="win-game">${winner.game}</span>
-                    <span class="win-time">Just now</span>
-                </div>
-            `).join('');
-        }
-        
-        loadRecentWinners();
+        // Initialize stats
+        updateStats();
+        setInterval(updateStats, 5000);
         
         // Modal functions
         function openModal(modalId) {
@@ -313,10 +400,10 @@
         function openDeposit() { openModal('depositModal'); }
         function openWithdraw() { openModal('withdrawModal'); }
         function openSettings() { openModal('settingsModal'); }
-        
         function openNotifications() {
             const panel = document.getElementById('notificationPanel');
             panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+            loadNotifications();
         }
         
         function closeNotifications() {
@@ -327,11 +414,202 @@
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
             localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+            
+            const themeBtn = document.querySelector('.action-btn.theme');
+            const icon = themeBtn.querySelector('i');
+            const text = document.body.classList.contains('light-mode') ? 'Light Mode' : 'Dark Mode';
+            
+            icon.className = document.body.classList.contains('light-mode') ? 'fas fa-sun' : 'fas fa-moon';
+            themeBtn.innerHTML = `<i class="${icon.className}"></i> ${text}`;
         }
         
-        // Check saved theme
-        if (localStorage.getItem('theme') === 'light') {
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
             document.body.classList.add('light-mode');
+            const themeBtn = document.querySelector('.action-btn.theme');
+            themeBtn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+        }
+        
+        // Stats functions
+        function updateStats() {
+            // Active Players
+            const basePlayers = 1247;
+            const playerChange = Math.floor(Math.random() * 100) - 50;
+            document.getElementById('activePlayers').textContent = 
+                (basePlayers + playerChange).toLocaleString();
+            
+            // Total Bets
+            const baseBets = 245820;
+            const betChange = Math.floor(Math.random() * 50000);
+            document.getElementById('totalBets').textContent = 
+                formatMoney(baseBets + betChange);
+            
+            // Online Now
+            const baseOnline = 843;
+            const onlineChange = Math.floor(Math.random() * 50) - 25;
+            document.getElementById('onlineNow').textContent = 
+                (baseOnline + onlineChange).toLocaleString();
+            
+            // Randomly update big win
+            if (Math.random() > 0.7) {
+                const bigWins = [500000, 750000, 1000000, 250000, 150000];
+                const randomWin = bigWins[Math.floor(Math.random() * bigWins.length)];
+                document.getElementById('bigWin').textContent = formatMoney(randomWin);
+            }
+        }
+        
+        function formatMoney(amount) {
+            return `${parseFloat(amount).toLocaleString('en-US')} TZS`;
+        }
+        
+        // Game functions
+        function showComingSoon() {
+            alert('Coming soon! This game is under development.');
+        }
+        
+        // Settings functions
+        function selectAvatar(avatarId) {
+            const avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=casino${avatarId}`;
+            document.getElementById('userAvatar').src = avatarUrl;
+            
+            // Update active state
+            document.querySelectorAll('.avatar-option').forEach(option => {
+                option.classList.remove('active');
+            });
+            event.target.closest('.avatar-option').classList.add('active');
+            
+            localStorage.setItem('userAvatar', avatarUrl);
+        }
+        
+        function changeTheme(theme) {
+            if (theme === 'light') {
+                document.body.classList.add('light-mode');
+            } else if (theme === 'dark') {
+                document.body.classList.remove('light-mode');
+            } else {
+                // Auto theme based on system preference
+                if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+                    document.body.classList.add('light-mode');
+                } else {
+                    document.body.classList.remove('light-mode');
+                }
+            }
+            localStorage.setItem('theme', theme);
+        }
+        
+        function saveSettings() {
+            const theme = document.getElementById('themeSelect').value;
+            const sound = document.getElementById('soundSelect').value;
+            
+            changeTheme(theme);
+            localStorage.setItem('soundSettings', sound);
+            
+            closeModal('settingsModal');
+            showNotification('Settings saved successfully!', 'success');
+        }
+        
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                window.location.href = 'login.html';
+            }
+        }
+        
+        // Load notifications
+        function loadNotifications() {
+            const notifications = [
+                { id: 1, type: 'success', message: 'Welcome to FeeCasino Bet!', time: 'Just now' },
+                { id: 2, type: 'info', message: 'Player_***45 won 250,000 TZS on Aviator!', time: '2 min ago' },
+                { id: 3, type: 'info', message: 'New tournament starting tomorrow!', time: '5 min ago' },
+                { id: 4, type: 'success', message: 'Your deposit of 50,000 TZS was successful', time: '1 hour ago' },
+                { id: 5, type: 'info', message: 'Weekly bonus available - claim now!', time: '2 hours ago' }
+            ];
+            
+            const list = document.getElementById('notificationsList');
+            list.innerHTML = notifications.map(notif => `
+                <div class="notification-item ${notif.type}">
+                    <div class="notification-icon">
+                        <i class="fas fa-${notif.type === 'success' ? 'check-circle' : 'info-circle'}"></i>
+                    </div>
+                    <div class="notification-content">
+                        <p>${notif.message}</p>
+                        <small>${notif.time}</small>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Transaction functions
+        function processDeposit() {
+            const amount = document.getElementById('depositAmount').value;
+            const method = document.getElementById('depositMethod').value;
+            
+            if (!amount || amount < 100) {
+                showNotification('Minimum deposit is 100 TZS', 'danger');
+                return;
+            }
+            
+            // Simulate deposit process
+            showNotification(`Deposit of ${formatMoney(amount)} via ${method} processing...`, 'info');
+            
+            setTimeout(() => {
+                closeModal('depositModal');
+                showNotification(`Deposit of ${formatMoney(amount)} successful!`, 'success');
+                document.getElementById('depositAmount').value = '';
+            }, 2000);
+        }
+        
+        function processWithdraw() {
+            const amount = document.getElementById('withdrawAmount').value;
+            const method = document.getElementById('withdrawMethod').value;
+            
+            if (!amount || amount < 100) {
+                showNotification('Minimum withdrawal is 100 TZS', 'danger');
+                return;
+            }
+            
+            // Simulate withdrawal process
+            showNotification(`Withdrawal of ${formatMoney(amount)} via ${method} processing...`, 'info');
+            
+            setTimeout(() => {
+                closeModal('withdrawModal');
+                showNotification(`Withdrawal of ${formatMoney(amount)} completed!`, 'success');
+                document.getElementById('withdrawAmount').value = '';
+            }, 3000);
+        }
+        
+        // Notification function
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'danger' ? 'exclamation-circle' : 'info-circle'}"></i>
+                <div>
+                    <p>${message}</p>
+                    <small>${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</small>
+                </div>
+            `;
+            
+            // Add to body
+            document.body.appendChild(notification);
+            
+            // Remove after 5 seconds
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+            
+            // Update badge
+            const badge = document.getElementById('notificationBadge');
+            if (badge) {
+                let count = parseInt(badge.textContent) || 0;
+                badge.textContent = count + 1;
+            }
+        }
+        
+        // Load saved avatar
+        const savedAvatar = localStorage.getItem('userAvatar');
+        if (savedAvatar) {
+            document.getElementById('userAvatar').src = savedAvatar;
         }
     </script>
 </body>

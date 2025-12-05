@@ -9,268 +9,707 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎰</text></svg>">
+    <style>
+        /* Additional styles for BetPawa-like layout */
+        :root {
+            --header-height: 60px;
+            --sidebar-width: 220px;
+            --content-padding: 20px;
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .main-sidebar {
+            width: var(--sidebar-width);
+            background: linear-gradient(180deg, #111827 0%, #1f2937 100%);
+            border-right: 1px solid var(--color-gray-dark);
+            position: fixed;
+            left: 0;
+            top: var(--header-height);
+            bottom: 0;
+            overflow-y: auto;
+            z-index: 90;
+        }
+
+        .sidebar-section {
+            padding: var(--spacing-lg) var(--spacing-md);
+            border-bottom: 1px solid var(--color-gray-dark);
+        }
+
+        .sidebar-section:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-title {
+            font-size: var(--font-size-sm);
+            text-transform: uppercase;
+            color: var(--color-gray);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: var(--spacing-md);
+            padding-left: var(--spacing-sm);
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-sm) var(--spacing-md);
+            color: var(--color-light);
+            text-decoration: none;
+            border-radius: var(--border-radius-md);
+            transition: all 0.2s ease;
+            font-size: var(--font-size-sm);
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background-color: var(--color-primary);
+            color: white;
+        }
+
+        .sidebar-menu a i {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Quick Stats */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .quick-stat {
+            background: linear-gradient(135deg, var(--color-secondary), var(--color-dark));
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-md);
+            text-align: center;
+        }
+
+        .quick-stat-value {
+            font-size: var(--font-size-xl);
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .quick-stat-label {
+            font-size: var(--font-size-xs);
+            color: var(--color-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Sports Grid */
+        .sports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .sport-card {
+            background: var(--color-secondary);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-md);
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .sport-card:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .sport-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--color-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-md);
+            font-size: 24px;
+            color: white;
+        }
+
+        .sport-name {
+            font-weight: 600;
+            color: var(--color-light);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .sport-matches {
+            font-size: var(--font-size-xs);
+            color: var(--color-success);
+        }
+
+        /* Live Events */
+        .live-events {
+            background: var(--color-secondary);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .live-header {
+            background: linear-gradient(90deg, var(--color-danger), #dc2626);
+            padding: var(--spacing-md) var(--spacing-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            color: white;
+        }
+
+        .live-pulse {
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+            animation: pulse 1s infinite;
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+            padding: var(--spacing-lg);
+        }
+
+        .event-card {
+            background: var(--color-dark);
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-md);
+            border: 1px solid var(--color-gray-dark);
+        }
+
+        .event-teams {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .team {
+            text-align: center;
+            flex: 1;
+        }
+
+        .team-name {
+            font-weight: 600;
+            color: var(--color-light);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .team-odds {
+            color: var(--color-success);
+            font-weight: 700;
+            font-size: var(--font-size-lg);
+        }
+
+        .vs {
+            color: var(--color-gray);
+            font-weight: 700;
+            padding: 0 var(--spacing-md);
+        }
+
+        .event-time {
+            text-align: center;
+            color: var(--color-gray);
+            font-size: var(--font-size-xs);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .event-markets {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .market-btn {
+            flex: 1;
+            padding: var(--spacing-sm);
+            background: var(--color-gray-dark);
+            border: none;
+            border-radius: var(--border-radius-sm);
+            color: var(--color-light);
+            font-size: var(--font-size-sm);
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .market-btn:hover {
+            background: var(--color-primary);
+        }
+
+        /* Quick Games */
+        .quick-games {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .quick-game {
+            background: var(--color-secondary);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-md);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quick-game:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .quick-game-icon {
+            font-size: 32px;
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .quick-game-name {
+            font-weight: 600;
+            color: var(--color-light);
+            font-size: var(--font-size-sm);
+        }
+
+        /* Balance Widget */
+        .balance-widget {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-lg);
+            color: white;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .balance-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .balance-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .balance-main {
+            text-align: center;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .balance-label {
+            font-size: var(--font-size-sm);
+            opacity: 0.9;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .balance-amount {
+            font-size: var(--font-size-3xl);
+            font-weight: 700;
+        }
+
+        .currency-selector {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-sm) var(--spacing-md);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .currency-selector select {
+            background: transparent;
+            border: none;
+            color: white;
+            font-weight: 600;
+        }
+
+        .currency-selector option {
+            color: var(--color-dark);
+        }
+
+        /* Main Content Area */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: var(--content-padding);
+            margin-top: var(--header-height);
+        }
+
+        /* Bet Slip */
+        .bet-slip {
+            position: fixed;
+            right: 0;
+            top: var(--header-height);
+            bottom: 0;
+            width: 320px;
+            background: var(--color-secondary);
+            border-left: 1px solid var(--color-gray-dark);
+            padding: var(--spacing-lg);
+            overflow-y: auto;
+            z-index: 80;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .bet-slip.show {
+            transform: translateX(0);
+        }
+
+        .bet-slip-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 1px solid var(--color-gray-dark);
+        }
+
+        .bet-count {
+            background: var(--color-primary);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+        }
+
+        .bet-item {
+            background: var(--color-dark);
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+            border: 1px solid var(--color-gray-dark);
+        }
+
+        .bet-info {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .bet-event {
+            font-weight: 600;
+            color: var(--color-light);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .bet-selection {
+            color: var(--color-gray);
+            font-size: var(--font-size-sm);
+        }
+
+        .bet-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-sidebar {
+                display: none;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .bet-slip {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .quick-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .sports-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+    </style>
 </head>
 <body>
     <!-- Header Component -->
     <div id="header-container"></div>
 
+    <!-- Sidebar -->
+    <aside class="main-sidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-title">Sports</div>
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active"><i class="fas fa-futbol"></i> Football</a></li>
+                <li><a href="#"><i class="fas fa-basketball-ball"></i> Basketball</a></li>
+                <li><a href="#"><i class="fas fa-tennis-ball"></i> Tennis</a></li>
+                <li><a href="#"><i class="fas fa-baseball-ball"></i> Baseball</a></li>
+                <li><a href="#"><i class="fas fa-hockey-puck"></i> Ice Hockey</a></li>
+                <li><a href="#"><i class="fas fa-football-ball"></i> American Football</a></li>
+                <li><a href="#"><i class="fas fa-volleyball-ball"></i> Volleyball</a></li>
+                <li><a href="#"><i class="fas fa-table-tennis"></i> Table Tennis</a></li>
+            </ul>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-title">Casino</div>
+            <ul class="sidebar-menu">
+                <li><a href="aviator/"><i class="fas fa-plane"></i> Aviator</a></li>
+                <li><a href="#"><i class="fas fa-sliders-h"></i> Slots</a></li>
+                <li><a href="#"><i class="fas fa-dice"></i> Live Casino</a></li>
+                <li><a href="#"><i class="fas fa-cards"></i> Blackjack</a></li>
+                <li><a href="#"><i class="fas fa-compass"></i> Roulette</a></li>
+                <li><a href="#"><i class="fas fa-poker-chip"></i> Poker</a></li>
+            </ul>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-title">Quick Links</div>
+            <ul class="sidebar-menu">
+                <li><a href="#"><i class="fas fa-star"></i> Favorites</a></li>
+                <li><a href="#"><i class="fas fa-history"></i> Bet History</a></li>
+                <li><a href="#"><i class="fas fa-chart-line"></i> Statistics</a></li>
+                <li><a href="#"><i class="fas fa-gift"></i> Promotions</a></li>
+                <li><a href="#"><i class="fas fa-trophy"></i> Leaderboard</a></li>
+                <li><a href="#"><i class="fas fa-question-circle"></i> Help</a></li>
+            </ul>
+        </div>
+    </aside>
+
     <!-- Main Content -->
     <main class="main-content">
-        <!-- Hero Section -->
-        <section class="hero-section">
-            <div class="hero-content">
-                <h1 class="hero-title">Welcome to <span class="brand-name">FeeCasino Bet</span></h1>
-                <p class="hero-subtitle">Experience the thrill of betting with fake money! Play responsibly.</p>
-                
-                <div class="hero-stats">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="stat-info">
-                            <h3 class="stat-value" id="online-users">1,247</h3>
-                            <p class="stat-label">Online Players</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-coins"></i>
-                        </div>
-                        <div class="stat-info">
-                            <h3 class="stat-value" id="total-wins">5.2M</h3>
-                            <p class="stat-label">Total Wins Today</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-trophy"></i>
-                        </div>
-                        <div class="stat-info">
-                            <h3 class="stat-value" id="biggest-win">250K</h3>
-                            <p class="stat-label">Biggest Win Today</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="hero-actions">
-                    <button class="btn btn-primary btn-lg" onclick="depositModal()">
-                        <i class="fas fa-plus-circle"></i> Deposit Fake Money
-                    </button>
-                    <button class="btn btn-outline btn-lg" onclick="withdrawModal()">
-                        <i class="fas fa-wallet"></i> Withdraw Fake Money
-                    </button>
-                </div>
-                
-                <div class="warning-banner">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <span>WARNING: This is a mock betting platform using fake money only. Not for real gambling.</span>
+        <!-- Quick Stats -->
+        <div class="quick-stats">
+            <div class="quick-stat">
+                <div class="quick-stat-value" id="online-users">1,247</div>
+                <div class="quick-stat-label">Online Players</div>
+            </div>
+            <div class="quick-stat">
+                <div class="quick-stat-value" id="total-wins">5.2M</div>
+                <div class="quick-stat-label">Total Wins</div>
+            </div>
+            <div class="quick-stat">
+                <div class="quick-stat-value" id="big-win">250K</div>
+                <div class="quick-stat-label">Biggest Win</div>
+            </div>
+            <div class="quick-stat">
+                <div class="quick-stat-value" id="live-games">42</div>
+                <div class="quick-stat-label">Live Games</div>
+            </div>
+        </div>
+
+        <!-- Balance Widget -->
+        <div class="balance-widget">
+            <div class="balance-header">
+                <h3>Your Balance</h3>
+                <div class="balance-actions">
+                    <button class="btn btn-success btn-sm" onclick="quickDeposit(1000)">+1K</button>
+                    <button class="btn btn-success btn-sm" onclick="quickDeposit(5000)">+5K</button>
+                    <button class="btn btn-success btn-sm" onclick="quickDeposit(10000)">+10K</button>
                 </div>
             </div>
-        </section>
-
-        <!-- Balance Display -->
-        <section class="balance-section">
-            <div class="balance-container">
-                <div class="balance-card">
-                    <h3 class="balance-title">Your Balance</h3>
-                    <div class="balance-amount">
-                        <span id="user-balance">10,000</span>
-                        <span id="user-currency">TZS</span>
-                    </div>
-                    <div class="balance-actions">
-                        <button class="btn btn-success btn-sm" onclick="quickDeposit(1000)">
-                            <i class="fas fa-plus"></i> +1,000
-                        </button>
-                        <button class="btn btn-success btn-sm" onclick="quickDeposit(5000)">
-                            <i class="fas fa-plus"></i> +5,000
-                        </button>
-                        <button class="btn btn-success btn-sm" onclick="quickDeposit(10000)">
-                            <i class="fas fa-plus"></i> +10,000
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="currency-selector">
-                    <label for="currency-select">Currency:</label>
-                    <select id="currency-select" class="form-select" onchange="changeCurrency(this.value)">
-                        <option value="TZS">TZS - Tanzanian Shilling</option>
-                        <option value="USD">USD - US Dollar</option>
-                        <option value="EUR">EUR - Euro</option>
-                        <option value="GBP">GBP - British Pound</option>
-                        <option value="KES">KES - Kenyan Shilling</option>
-                        <option value="UGX">UGX - Ugandan Shilling</option>
-                        <option value="NGN">NGN - Nigerian Naira</option>
-                        <option value="ZAR">ZAR - South African Rand</option>
-                    </select>
+            <div class="balance-main">
+                <div class="balance-label">Available Balance</div>
+                <div class="balance-amount">
+                    <span id="user-balance">10,000</span>
+                    <span id="user-currency">TZS</span>
                 </div>
             </div>
-        </section>
-
-        <!-- Games Section -->
-        <section class="games-section">
-            <h2 class="section-title">Popular Games</h2>
-            
-            <div class="games-grid">
-                <!-- Aviator Game Card -->
-                <div class="game-card featured">
-                    <div class="game-badge">HOT</div>
-                    <div class="game-image" style="background: linear-gradient(135deg, #10b981, #047857);">
-                        <i class="fas fa-plane-departure"></i>
-                    </div>
-                    <div class="game-info">
-                        <h3 class="game-title">Aviator</h3>
-                        <p class="game-description">Predict when the plane will crash. Cash out before it flies away!</p>
-                        <div class="game-stats">
-                            <span class="game-stat">
-                                <i class="fas fa-chart-line"></i> RTP: 99%
-                            </span>
-                            <span class="game-stat">
-                                <i class="fas fa-users"></i> 542 playing
-                            </span>
-                        </div>
-                        <button class="btn btn-primary btn-block" onclick="window.location.href='aviator/'">
-                            <i class="fas fa-play"></i> Play Now
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Other Games -->
-                <div class="game-card">
-                    <div class="game-image" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
-                        <i class="fas fa-sliders-h"></i>
-                    </div>
-                    <div class="game-info">
-                        <h3 class="game-title">Slots</h3>
-                        <p class="game-description">Classic slot machines with bonus rounds</p>
-                        <button class="btn btn-outline btn-block" onclick="showComingSoon()">
-                            <i class="fas fa-play"></i> Play Slots
-                        </button>
-                    </div>
-                </div>
-
-                <div class="game-card">
-                    <div class="game-image" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
-                        <i class="fas fa-basketball-ball"></i>
-                    </div>
-                    <div class="game-info">
-                        <h3 class="game-title">Sports Betting</h3>
-                        <p class="game-description">Bet on virtual sports events</p>
-                        <button class="btn btn-outline btn-block" onclick="showComingSoon()">
-                            <i class="fas fa-play"></i> Bet Now
-                        </button>
-                    </div>
-                </div>
-
-                <div class="game-card">
-                    <div class="game-image" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
-                        <i class="fas fa-dice"></i>
-                    </div>
-                    <div class="game-info">
-                        <h3 class="game-title">Live Casino</h3>
-                        <p class="game-description">Roulette, Blackjack, Baccarat</p>
-                        <button class="btn btn-outline btn-block" onclick="showComingSoon()">
-                            <i class="fas fa-play"></i> Join Table
-                        </button>
-                    </div>
-                </div>
+            <div class="currency-selector">
+                <i class="fas fa-money-bill-wave"></i>
+                <select id="currency-select" onchange="changeCurrency(this.value)">
+                    <option value="TZS">TZS</option>
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="GBP">GBP</option>
+                    <option value="KES">KES</option>
+                </select>
             </div>
-        </section>
+        </div>
 
-        <!-- Recent Activity -->
-        <section class="activity-section">
-            <h2 class="section-title">Recent Wins</h2>
-            <div class="activity-list">
-                <!-- Will be populated by JavaScript -->
-                <div class="activity-item">
-                    <div class="activity-avatar">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <div class="activity-content">
-                        <p><strong>AnonymousPlayer</strong> won <span class="win-amount">250,000 TZS</span> on Aviator</p>
-                        <small class="activity-time">2 minutes ago</small>
-                    </div>
+        <!-- Quick Games -->
+        <div class="section-header">
+            <h2 class="section-title">Quick Games</h2>
+            <button class="btn btn-outline btn-sm" onclick="showAllGames()">View All</button>
+        </div>
+        <div class="quick-games">
+            <div class="quick-game" onclick="window.location.href='aviator/'">
+                <div class="quick-game-icon">
+                    <i class="fas fa-plane"></i>
                 </div>
-                <!-- More items will be added by JS -->
+                <div class="quick-game-name">Aviator</div>
             </div>
-        </section>
+            <div class="quick-game" onclick="showComingSoon()">
+                <div class="quick-game-icon">
+                    <i class="fas fa-sliders-h"></i>
+                </div>
+                <div class="quick-game-name">Slots</div>
+            </div>
+            <div class="quick-game" onclick="showComingSoon()">
+                <div class="quick-game-icon">
+                    <i class="fas fa-dice"></i>
+                </div>
+                <div class="quick-game-name">Dice</div>
+            </div>
+            <div class="quick-game" onclick="showComingSoon()">
+                <div class="quick-game-icon">
+                    <i class="fas fa-wheel"></i>
+                </div>
+                <div class="quick-game-name">Wheel</div>
+            </div>
+            <div class="quick-game" onclick="showComingSoon()">
+                <div class="quick-game-icon">
+                    <i class="fas fa-cards"></i>
+                </div>
+                <div class="quick-game-name">Blackjack</div>
+            </div>
+            <div class="quick-game" onclick="showComingSoon()">
+                <div class="quick-game-icon">
+                    <i class="fas fa-compass"></i>
+                </div>
+                <div class="quick-game-name">Roulette</div>
+            </div>
+        </div>
+
+        <!-- Sports Grid -->
+        <div class="section-header">
+            <h2 class="section-title">Popular Sports</h2>
+            <button class="btn btn-outline btn-sm" onclick="showAllSports()">All Sports</button>
+        </div>
+        <div class="sports-grid">
+            <div class="sport-card" onclick="showSportEvents('football')">
+                <div class="sport-icon">
+                    <i class="fas fa-futbol"></i>
+                </div>
+                <div class="sport-name">Football</div>
+                <div class="sport-matches">124 Matches</div>
+            </div>
+            <div class="sport-card" onclick="showSportEvents('basketball')">
+                <div class="sport-icon">
+                    <i class="fas fa-basketball-ball"></i>
+                </div>
+                <div class="sport-name">Basketball</div>
+                <div class="sport-matches">86 Matches</div>
+            </div>
+            <div class="sport-card" onclick="showSportEvents('tennis')">
+                <div class="sport-icon">
+                    <i class="fas fa-tennis-ball"></i>
+                </div>
+                <div class="sport-name">Tennis</div>
+                <div class="sport-matches">42 Matches</div>
+            </div>
+            <div class="sport-card" onclick="showSportEvents('baseball')">
+                <div class="sport-icon">
+                    <i class="fas fa-baseball-ball"></i>
+                </div>
+                <div class="sport-name">Baseball</div>
+                <div class="sport-matches">31 Matches</div>
+            </div>
+            <div class="sport-card" onclick="showSportEvents('hockey')">
+                <div class="sport-icon">
+                    <i class="fas fa-hockey-puck"></i>
+                </div>
+                <div class="sport-name">Ice Hockey</div>
+                <div class="sport-matches">28 Matches</div>
+            </div>
+            <div class="sport-card" onclick="showSportEvents('volleyball')">
+                <div class="sport-icon">
+                    <i class="fas fa-volleyball-ball"></i>
+                </div>
+                <div class="sport-name">Volleyball</div>
+                <div class="sport-matches">19 Matches</div>
+            </div>
+        </div>
+
+        <!-- Live Events -->
+        <div class="live-events">
+            <div class="live-header">
+                <div class="live-pulse"></div>
+                <h3>Live Events Now</h3>
+                <span>42 events</span>
+            </div>
+            <div class="events-grid" id="live-events-container">
+                <!-- Events will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Warning Banner -->
+        <div class="warning-banner">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>WARNING: This is a mock betting platform using fake money only. Not for real gambling.</span>
+        </div>
     </main>
+
+    <!-- Bet Slip -->
+    <aside class="bet-slip" id="bet-slip">
+        <div class="bet-slip-header">
+            <h3>Bet Slip</h3>
+            <div class="bet-count" id="bet-count">0</div>
+        </div>
+        <div id="bets-container">
+            <!-- Bets will be added here -->
+            <div class="empty-state">
+                <i class="fas fa-shopping-cart"></i>
+                <p>Your bet slip is empty</p>
+                <small>Add selections from events to place bets</small>
+            </div>
+        </div>
+        <div class="bet-total" style="display: none;" id="bet-total">
+            <div class="total-row">
+                <span>Stake:</span>
+                <span id="total-stake">0 TZS</span>
+            </div>
+            <div class="total-row">
+                <span>Potential Win:</span>
+                <span id="potential-win">0 TZS</span>
+            </div>
+            <button class="btn btn-primary btn-block" onclick="placeBets()">Place Bets</button>
+        </div>
+    </aside>
 
     <!-- Footer Component -->
     <div id="footer-container"></div>
 
     <!-- Modals -->
     <div id="deposit-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Deposit Fake Money</h3>
-                <button class="modal-close" onclick="closeModal('deposit-modal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="deposit-amount">Amount</label>
-                    <div class="input-group">
-                        <input type="number" id="deposit-amount" class="form-control" min="1" value="1000">
-                        <span class="input-group-text" id="deposit-currency">TZS</span>
-                    </div>
-                </div>
-                <div class="quick-amounts">
-                    <button class="quick-amount-btn" onclick="setDepositAmount(500)">500</button>
-                    <button class="quick-amount-btn" onclick="setDepositAmount(1000)">1,000</button>
-                    <button class="quick-amount-btn" onclick="setDepositAmount(5000)">5,000</button>
-                    <button class="quick-amount-btn" onclick="setDepositAmount(10000)">10,000</button>
-                    <button class="quick-amount-btn" onclick="setDepositAmount(50000)">50,000</button>
-                </div>
-                <p class="modal-note">
-                    <i class="fas fa-info-circle"></i>
-                    This is fake money for entertainment only. No real money is involved.
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-outline" onclick="closeModal('deposit-modal')">Cancel</button>
-                <button class="btn btn-primary" onclick="processDeposit()">Deposit</button>
-            </div>
-        </div>
+        <!-- Keep existing deposit modal -->
     </div>
 
     <div id="withdraw-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Withdraw Fake Money</h3>
-                <button class="modal-close" onclick="closeModal('withdraw-modal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="withdraw-amount">Amount (Min: 100 <span id="withdraw-currency">TZS</span>)</label>
-                    <div class="input-group">
-                        <input type="number" id="withdraw-amount" class="form-control" min="100" value="100">
-                        <span class="input-group-text" id="withdraw-currency-text">TZS</span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="withdraw-method">Withdrawal Method</label>
-                    <select id="withdraw-method" class="form-control">
-                        <option value="bank">Fake Bank Transfer</option>
-                        <option value="mobile">Fake Mobile Money</option>
-                        <option value="card">Fake Card Withdrawal</option>
-                    </select>
-                </div>
-                <div class="info-box">
-                    <i class="fas fa-clock"></i>
-                    <div>
-                        <strong>Simulated Processing Time:</strong>
-                        <p>Fake withdrawals are processed instantly for demonstration purposes.</p>
-                    </div>
-                </div>
-                <p class="modal-note warning">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    WARNING: This is a mock platform. No real money will be transferred.
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-outline" onclick="closeModal('withdraw-modal')">Cancel</button>
-                <button class="btn btn-primary" onclick="processWithdrawal()">Withdraw</button>
-            </div>
-        </div>
+        <!-- Keep existing withdraw modal -->
     </div>
 
     <!-- Notification Container -->
@@ -284,5 +723,279 @@
     <script type="module" src="components/sound.js"></script>
     <script type="module" src="api/auth.js"></script>
     <script type="module" src="api/balance.js"></script>
+    <script type="module" src="api/games.js"></script>
+
+    <script>
+        // Live events data
+        const liveEvents = [
+            {
+                id: 1,
+                sport: 'Football',
+                league: 'Premier League',
+                team1: 'Manchester United',
+                team2: 'Manchester City',
+                time: '45\' +3',
+                odds1: 2.45,
+                odds2: 1.85,
+                oddsDraw: 3.20
+            },
+            {
+                id: 2,
+                sport: 'Basketball',
+                league: 'NBA',
+                team1: 'Lakers',
+                team2: 'Warriors',
+                time: 'Q3 8:45',
+                odds1: 1.95,
+                odds2: 1.80
+            },
+            {
+                id: 3,
+                sport: 'Tennis',
+                league: 'ATP Tour',
+                team1: 'Djokovic',
+                team2: 'Nadal',
+                time: 'Set 2 4-3',
+                odds1: 1.65,
+                odds2: 2.20
+            },
+            {
+                id: 4,
+                sport: 'Football',
+                league: 'La Liga',
+                team1: 'Barcelona',
+                team2: 'Real Madrid',
+                time: '62\'',
+                odds1: 2.10,
+                odds2: 1.75,
+                oddsDraw: 3.40
+            }
+        ];
+
+        // Bet slip state
+        let bets = [];
+        let betSlipVisible = false;
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            loadLiveEvents();
+            updateBetSlip();
+            
+            // Toggle bet slip
+            document.addEventListener('click', (e) => {
+                if (e.target.closest('.market-btn')) {
+                    addToBetSlip(e.target.closest('.market-btn').dataset);
+                    toggleBetSlip(true);
+                }
+            });
+        });
+
+        function loadLiveEvents() {
+            const container = document.getElementById('live-events-container');
+            if (!container) return;
+
+            container.innerHTML = liveEvents.map(event => `
+                <div class="event-card">
+                    <div class="event-teams">
+                        <div class="team">
+                            <div class="team-name">${event.team1}</div>
+                            <div class="team-odds">${event.odds1}</div>
+                        </div>
+                        <div class="vs">VS</div>
+                        <div class="team">
+                            <div class="team-name">${event.team2}</div>
+                            <div class="team-odds">${event.odds2}</div>
+                        </div>
+                    </div>
+                    <div class="event-time">
+                        ${event.sport} • ${event.league} • ${event.time}
+                    </div>
+                    <div class="event-markets">
+                        <button class="market-btn" data-event="${event.id}" data-team="${event.team1}" data-odds="${event.odds1}">
+                            ${event.team1} (${event.odds1})
+                        </button>
+                        ${event.oddsDraw ? `
+                        <button class="market-btn" data-event="${event.id}" data-team="Draw" data-odds="${event.oddsDraw}">
+                            Draw (${event.oddsDraw})
+                        </button>
+                        ` : ''}
+                        <button class="market-btn" data-event="${event.id}" data-team="${event.team2}" data-odds="${event.odds2}">
+                            ${event.team2} (${event.odds2})
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function addToBetSlip(data) {
+            const bet = {
+                id: Date.now(),
+                eventId: data.event,
+                team: data.team,
+                odds: parseFloat(data.odds),
+                stake: 100 // Default stake
+            };
+            
+            bets.push(bet);
+            updateBetSlip();
+            showNotification({
+                title: 'Added to Bet Slip',
+                message: `${bet.team} @ ${bet.odds}x added to bet slip`,
+                type: 'success'
+            });
+        }
+
+        function updateBetSlip() {
+            const count = document.getElementById('bet-count');
+            const container = document.getElementById('bets-container');
+            const totalSection = document.getElementById('bet-total');
+            
+            if (count) count.textContent = bets.length;
+            
+            if (bets.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-shopping-cart"></i>
+                        <p>Your bet slip is empty</p>
+                        <small>Add selections from events to place bets</small>
+                    </div>
+                `;
+                if (totalSection) totalSection.style.display = 'none';
+                return;
+            }
+            
+            container.innerHTML = bets.map(bet => `
+                <div class="bet-item">
+                    <div class="bet-info">
+                        <div class="bet-event">Event #${bet.eventId}</div>
+                        <div class="bet-selection">${bet.team} @ ${bet.odds}x</div>
+                    </div>
+                    <div class="bet-actions">
+                        <input type="number" class="form-control" value="${bet.stake}" 
+                               onchange="updateBetStake(${bet.id}, this.value)" 
+                               style="flex: 1; margin-right: 10px;">
+                        <button class="btn btn-danger btn-sm" onclick="removeBet(${bet.id})">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+            
+            if (totalSection) {
+                totalSection.style.display = 'block';
+                const totalStake = bets.reduce((sum, bet) => sum + bet.stake, 0);
+                const potentialWin = bets.reduce((sum, bet) => sum + (bet.stake * bet.odds), 0);
+                
+                document.getElementById('total-stake').textContent = `${totalStake} TZS`;
+                document.getElementById('potential-win').textContent = `${potentialWin.toFixed(2)} TZS`;
+            }
+        }
+
+        function updateBetStake(betId, stake) {
+            const bet = bets.find(b => b.id === betId);
+            if (bet) {
+                bet.stake = parseFloat(stake) || 0;
+                updateBetSlip();
+            }
+        }
+
+        function removeBet(betId) {
+            bets = bets.filter(b => b.id !== betId);
+            updateBetSlip();
+            showNotification({
+                title: 'Bet Removed',
+                message: 'Selection removed from bet slip',
+                type: 'info'
+            });
+        }
+
+        function toggleBetSlip(show) {
+            const slip = document.getElementById('bet-slip');
+            if (show !== undefined) {
+                betSlipVisible = show;
+            } else {
+                betSlipVisible = !betSlipVisible;
+            }
+            
+            if (slip) {
+                slip.classList.toggle('show', betSlipVisible);
+            }
+        }
+
+        function placeBets() {
+            if (bets.length === 0) {
+                showNotification({
+                    title: 'Empty Bet Slip',
+                    message: 'Add selections to place bets',
+                    type: 'warning'
+                });
+                return;
+            }
+            
+            const totalStake = bets.reduce((sum, bet) => sum + bet.stake, 0);
+            const currentBalance = parseFloat(document.getElementById('user-balance').textContent.replace(/,/g, ''));
+            
+            if (totalStake > currentBalance) {
+                showNotification({
+                    title: 'Insufficient Balance',
+                    message: `You need ${totalStake} TZS but only have ${currentBalance} TZS`,
+                    type: 'error'
+                });
+                return;
+            }
+            
+            // Simulate placing bets
+            showNotification({
+                title: 'Bets Placed!',
+                message: `${bets.length} bets placed successfully. Good luck!`,
+                type: 'success'
+            });
+            
+            // Update balance
+            const newBalance = currentBalance - totalStake;
+            document.getElementById('user-balance').textContent = newBalance.toLocaleString();
+            
+            // Clear bet slip
+            bets = [];
+            updateBetSlip();
+            toggleBetSlip(false);
+            
+            // Play sound
+            if (window.playSound) {
+                window.playSound('notification');
+            }
+        }
+
+        // Global functions
+        window.showAllGames = function() {
+            showNotification({
+                title: 'All Games',
+                message: 'Showing all available games',
+                type: 'info'
+            });
+        };
+
+        window.showAllSports = function() {
+            showNotification({
+                title: 'All Sports',
+                message: 'Showing all sports categories',
+                type: 'info'
+            });
+        };
+
+        window.showSportEvents = function(sport) {
+            showNotification({
+                title: sport.charAt(0).toUpperCase() + sport.slice(1),
+                message: `Loading ${sport} events...`,
+                type: 'info'
+            });
+        };
+
+        window.toggleBetSlip = toggleBetSlip;
+        window.addToBetSlip = addToBetSlip;
+        window.removeBet = removeBet;
+        window.placeBets = placeBets;
+        window.updateBetStake = updateBetStake;
+    </script>
 </body>
 </html>

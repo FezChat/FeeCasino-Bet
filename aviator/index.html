@@ -1,0 +1,184 @@
+<!-- aviator/index.html -->
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aviator Game | FeeCasino Bet</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="aviator.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+</head>
+<body>
+    <!-- Header -->
+    <header class="aviator-header">
+        <div class="header-content">
+            <a href="../" class="back-button">
+                <i class="fas fa-arrow-left"></i> Back to Lobby
+            </a>
+            <div class="header-balance">
+                <span class="balance-label">Balance:</span>
+                <span class="balance-amount" id="aviator-balance">10,000</span>
+                <span class="balance-currency">TZS</span>
+            </div>
+            <button class="btn btn-primary" onclick="window.location.href='../'">
+                <i class="fas fa-home"></i> Home
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Game Container -->
+    <main class="aviator-container">
+        <!-- Game Area -->
+        <div class="game-area">
+            <div class="game-header">
+                <h1 class="game-title">
+                    <i class="fas fa-plane"></i> AVIATOR
+                </h1>
+                <div class="game-stats">
+                    <div class="stat">
+                        <span class="stat-label">Players</span>
+                        <span class="stat-value" id="player-count">342</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Round</span>
+                        <span class="stat-value" id="round-number">#1,247</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Highest Multiplier</span>
+                        <span class="stat-value" id="highest-multiplier">12.5x</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Canvas -->
+            <div class="game-canvas-container">
+                <div class="multiplier-display">
+                    <div class="multiplier-label">MULTIPLIER</div>
+                    <div class="multiplier-value" id="current-multiplier">1.00x</div>
+                </div>
+                
+                <div class="canvas-wrapper">
+                    <canvas id="game-canvas" width="800" height="400"></canvas>
+                    <div class="plane-container">
+                        <div class="plane" id="plane">
+                            <i class="fas fa-plane"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="crash-point-display">
+                    <div class="crash-label">CRASHED AT</div>
+                    <div class="crash-value" id="last-crash">2.45x</div>
+                </div>
+            </div>
+
+            <!-- Betting Panel -->
+            <div class="betting-panel">
+                <div class="bet-amount-section">
+                    <div class="section-header">
+                        <h3>Bet Amount</h3>
+                        <div class="quick-buttons">
+                            <button class="quick-btn" onclick="setBetAmount(100)">100</button>
+                            <button class="quick-btn" onclick="setBetAmount(500)">500</button>
+                            <button class="quick-btn" onclick="setBetAmount(1000)">1K</button>
+                            <button class="quick-btn" onclick="setBetAmount(5000)">5K</button>
+                            <button class="quick-btn" onclick="setBetAmount(10000)">10K</button>
+                        </div>
+                    </div>
+                    <div class="amount-input">
+                        <input type="number" id="bet-amount" class="form-control" value="100" min="10">
+                        <span class="input-currency">TZS</span>
+                    </div>
+                    <div class="bet-slider">
+                        <input type="range" id="bet-slider" min="10" max="100000" value="100" step="10">
+                    </div>
+                </div>
+
+                <div class="auto-cashout-section">
+                    <div class="section-header">
+                        <h3>Auto Cashout</h3>
+                        <label class="switch">
+                            <input type="checkbox" id="auto-cashout-toggle">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="cashout-input" id="cashout-input">
+                        <input type="number" id="cashout-multiplier" class="form-control" value="2.00" min="1.10" max="1000" step="0.1" disabled>
+                        <span class="input-label">x</span>
+                    </div>
+                    <div class="quick-multipliers">
+                        <button class="multiplier-btn" onclick="setCashoutMultiplier(1.5)">1.5x</button>
+                        <button class="multiplier-btn" onclick="setCashoutMultiplier(2)">2x</button>
+                        <button class="multiplier-btn" onclick="setCashoutMultiplier(5)">5x</button>
+                        <button class="multiplier-btn" onclick="setCashoutMultiplier(10)">10x</button>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-primary btn-lg" id="place-bet-btn" onclick="placeBet()">
+                        <i class="fas fa-arrow-circle-up"></i> PLACE BET
+                    </button>
+                    <button class="btn btn-success btn-lg" id="cashout-btn" onclick="cashOut()" disabled>
+                        <i class="fas fa-arrow-circle-down"></i> CASH OUT
+                    </button>
+                    <button class="btn btn-danger btn-lg" onclick="resetGame()">
+                        <i class="fas fa-redo"></i> RESET
+                    </button>
+                </div>
+            </div>
+
+            <!-- Bet History -->
+            <div class="history-section">
+                <h3>Recent Games</h3>
+                <div class="history-list" id="history-list">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Side Panel -->
+        <div class="side-panel">
+            <!-- My Bets -->
+            <div class="my-bets">
+                <h3>My Bets</h3>
+                <div class="bets-list" id="my-bets-list">
+                    <div class="empty-state">
+                        <i class="fas fa-money-check-alt"></i>
+                        <p>No active bets</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leaderboard -->
+            <div class="leaderboard">
+                <h3>Top Winners</h3>
+                <div class="leaderboard-list" id="leaderboard-list">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Game Info -->
+            <div class="game-info">
+                <h3>How to Play</h3>
+                <ul class="info-list">
+                    <li><i class="fas fa-plane"></i> Place your bet before the round starts</li>
+                    <li><i class="fas fa-chart-line"></i> Watch the multiplier increase</li>
+                    <li><i class="fas fa-running"></i> Cash out before the plane crashes</li>
+                    <li><i class="fas fa-coins"></i> Win = Bet × Multiplier at cashout</li>
+                    <li><i class="fas fa-exclamation-triangle"></i> If plane crashes before cashout, you lose your bet</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <!-- Notification Container -->
+    <div id="notification-container"></div>
+
+    <!-- Scripts -->
+    <script type="module" src="aviator.js"></script>
+    <script type="module" src="../components/notification.js"></script>
+    <script type="module" src="../components/sound.js"></script>
+</body>
+</html>

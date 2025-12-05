@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FeeCasino Bet - Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <i class="fas fa-dice" style="color: var(--primary-green); font-size: 2rem;"></i>
+            <h1>FeeCasino Bet</h1>
+        </div>
+        
+        <div class="user-section">
+            <div class="balance-card">
+                <small>Balance</small>
+                <div class="amount" id="userBalance">0 TZS</div>
+            </div>
+            
+            <img id="userAvatar" src="" alt="Avatar" class="avatar">
+            <button onclick="openSettings()" class="settings-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+        </div>
+    </header>
+    
+    <!-- Navigation -->
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="aviator.html"><i class="fas fa-plane"></i> Aviator</a></li>
+            <li><a href="#"><i class="fas fa-gamepad"></i> Slots</a></li>
+            <li><a href="#"><i class="fas fa-dice"></i> Live Casino</a></li>
+            <li><a href="#"><i class="fas fa-trophy"></i> Tournaments</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Main Content -->
+    <main>
+        <section class="quick-actions">
+            <h2><i class="fas fa-bolt"></i> Quick Actions</h2>
+            <div class="action-buttons">
+                <button onclick="openDeposit()" class="action-btn">
+                    <i class="fas fa-plus-circle"></i> Deposit
+                </button>
+                <button onclick="openWithdraw()" class="action-btn">
+                    <i class="fas fa-minus-circle"></i> Withdraw
+                </button>
+                <button onclick="openNotifications()" class="action-btn">
+                    <i class="fas fa-bell"></i> Notifications
+                    <span id="notificationBadge" class="badge">0</span>
+                </button>
+                <button onclick="toggleTheme()" class="action-btn">
+                    <i class="fas fa-moon"></i> Theme
+                </button>
+            </div>
+        </section>
+        
+        <section class="live-stats">
+            <h2><i class="fas fa-chart-line"></i> Live Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Active Players</h3>
+                    <div class="stat-value" id="activePlayers">1,247</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Bets Today</h3>
+                    <div class="stat-value" id="totalBets">4,892</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Big Win</h3>
+                    <div class="stat-value" id="bigWin">500,000 TZS</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Online Now</h3>
+                    <div class="stat-value" id="onlineNow">843</div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="featured-games">
+            <h2><i class="fas fa-fire"></i> Featured Games</h2>
+            <div class="games-grid">
+                <div class="game-card">
+                    <img src="https://images.unsplash.com/photo-1635315563254-a18ad757f0d3?w=400&h=180&fit=crop" alt="Aviator">
+                    <div class="game-info">
+                        <h3>Aviator</h3>
+                        <p>Predict when the plane will fly away. Multiply your bet!</p>
+                        <button onclick="window.location.href='aviator.html'" class="play-btn">
+                            <i class="fas fa-play"></i> Play Now
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="game-card">
+                    <img src="https://images.unsplash.com/photo-1614732414444-096e5f1122d5?w=400&h=180&fit=crop" alt="Slots">
+                    <div class="game-info">
+                        <h3>Mega Slots</h3>
+                        <p>Spin and win big with our progressive jackpot slots</p>
+                        <button class="play-btn">
+                            <i class="fas fa-play"></i> Coming Soon
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="game-card">
+                    <img src="https://images.unsplash.com/photo-1568430462989-44163eb1752f?w=400&h=180&fit=crop" alt="Blackjack">
+                    <div class="game-info">
+                        <h3>Blackjack</h3>
+                        <p>Beat the dealer in this classic card game</p>
+                        <button class="play-btn">
+                            <i class="fas fa-play"></i> Coming Soon
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="recent-winners">
+            <h2><i class="fas fa-trophy"></i> Recent Winners</h2>
+            <div class="winners-list" id="winnersList">
+                <!-- Filled by JavaScript -->
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="https://wa.me/255752593977">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <a href="https://www.instagram.com/@frediezra">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+            <a href="https://www.facebook.com/@FrediEzra">
+                <i class="fab fa-facebook"></i> Facebook
+            </a>
+            <a href="https://whatsapp.com/channel/0029VaihcQv84Om8LP59fO3f">
+                <i class="fab fa-whatsapp"></i> WhatsApp Channel
+            </a>
+            <a href="https://chat.whatsapp.com/KERPI5K0w0L9rzU00QSw40">
+                <i class="fab fa-whatsapp"></i> WhatsApp Group
+            </a>
+            <a href="https://thread.com/@frediezra">
+                <i class="fab fa-threads"></i> Threads
+            </a>
+            <a href="https://twitter.com/@frediezra">
+                <i class="fab fa-twitter"></i> Twitter/X
+            </a>
+            <a href="https://tiktok.com/frediezra1">
+                <i class="fab fa-tiktok"></i> TikTok
+            </a>
+            <a href="https://youtube.com/FrediAi-tech">
+                <i class="fab fa-youtube"></i> YouTube
+            </a>
+        </div>
+        
+        <div class="copyright">
+            <p>Contact: +255752593977 | Email: support@feecasino.com</p>
+            <p>&copy; FeeCasino Bet <span id="copyrightYear"></span>. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- Modals -->
+    <div id="depositModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-plus-circle"></i> Deposit</h2>
+                <button class="close-btn" onclick="closeModal('depositModal')">&times;</button>
+            </div>
+            <div class="form-group">
+                <label>Amount (Min: 100 TZS)</label>
+                <input type="number" id="depositAmount" min="100" placeholder="Enter amount">
+            </div>
+            <button onclick="processDeposit()" class="play-btn">Deposit Now</button>
+        </div>
+    </div>
+    
+    <div id="withdrawModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-minus-circle"></i> Withdraw</h2>
+                <button class="close-btn" onclick="closeModal('withdrawModal')">&times;</button>
+            </div>
+            <div class="form-group">
+                <label>Amount (Min: 100 TZS)</label>
+                <input type="number" id="withdrawAmount" min="100" placeholder="Enter amount">
+            </div>
+            <div class="form-group">
+                <label>Payment Method</label>
+                <select id="withdrawMethod">
+                    <option value="mpesa">M-Pesa</option>
+                    <option value="tigopesa">Tigo Pesa</option>
+                    <option value="airtelmoney">Airtel Money</option>
+                </select>
+            </div>
+            <button onclick="processWithdraw()" class="play-btn">Withdraw Now</button>
+        </div>
+    </div>
+    
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-cog"></i> Settings</h2>
+                <button class="close-btn" onclick="closeModal('settingsModal')">&times;</button>
+            </div>
+            
+            <div class="form-group">
+                <label>Avatar</label>
+                <div class="avatar-grid">
+                    <div class="avatar-option" onclick="selectAvatar(1)">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=casino1" class="avatar-select">
+                    </div>
+                    <div class="avatar-option" onclick="selectAvatar(2)">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=casino2" class="avatar-select">
+                    </div>
+                    <div class="avatar-option" onclick="selectAvatar(3)">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=casino3" class="avatar-select">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Theme</label>
+                <select id="themeSelect" onchange="changeTheme(this.value)">
+                    <option value="dark">Dark Mode</option>
+                    <option value="light">Light Mode</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Notification Sound</label>
+                <select id="soundSelect">
+                    <option value="on">On</option>
+                    <option value="off">Off</option>
+                </select>
+            </div>
+            
+            <button onclick="saveSettings()" class="play-btn">Save Settings</button>
+            <button onclick="logout()" class="play-btn" style="background: var(--danger); margin-top: 10px;">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+    </div>
+    
+    <div id="notificationPanel" class="notification-panel" style="display: none;">
+        <div class="modal-header">
+            <h3><i class="fas fa-bell"></i> Notifications</h3>
+            <button class="close-btn" onclick="closeNotifications()">&times;</button>
+        </div>
+        <div id="notificationsList"></div>
+    </div>
+    
+    <script type="module" src="app.js"></script>
+    <script>
+        // Set copyright year
+        document.getElementById('copyrightYear').textContent = new Date().getFullYear();
+        
+        // Update live stats (fake data)
+        setInterval(() => {
+            const activePlayers = Math.floor(Math.random() * 500) + 1000;
+            const totalBets = Math.floor(Math.random() * 1000) + 4000;
+            const onlineNow = Math.floor(Math.random() * 200) + 700;
+            
+            document.getElementById('activePlayers').textContent = activePlayers.toLocaleString();
+            document.getElementById('totalBets').textContent = totalBets.toLocaleString();
+            document.getElementById('onlineNow').textContent = onlineNow.toLocaleString();
+            
+            // Update big win randomly
+            if (Math.random() > 0.7) {
+                const bigWin = Math.floor(Math.random() * 1000000) + 100000;
+                document.getElementById('bigWin').textContent = `${bigWin.toLocaleString()} TZS`;
+            }
+        }, 5000);
+        
+        // Load recent winners
+        function loadRecentWinners() {
+            const winners = [
+                { name: "Player_***23", amount: "150,000 TZS", game: "Aviator" },
+                { name: "Lucky_***88", amount: "75,000 TZS", game: "Slots" },
+                { name: "Win_***45", amount: "250,000 TZS", game: "Aviator" },
+                { name: "Bet_***12", amount: "50,000 TZS", game: "Blackjack" },
+                { name: "Cash_***99", amount: "180,000 TZS", game: "Aviator" }
+            ];
+            
+            const winnersList = document.getElementById('winnersList');
+            winnersList.innerHTML = winners.map(winner => `
+                <div class="winner-item">
+                    <span>${winner.name}</span>
+                    <span class="win-amount">${winner.amount}</span>
+                    <span class="win-game">${winner.game}</span>
+                    <span class="win-time">Just now</span>
+                </div>
+            `).join('');
+        }
+        
+        loadRecentWinners();
+        
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        
+        function openDeposit() { openModal('depositModal'); }
+        function openWithdraw() { openModal('withdrawModal'); }
+        function openSettings() { openModal('settingsModal'); }
+        
+        function openNotifications() {
+            const panel = document.getElementById('notificationPanel');
+            panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+        }
+        
+        function closeNotifications() {
+            document.getElementById('notificationPanel').style.display = 'none';
+        }
+        
+        // Theme toggle
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+        }
+        
+        // Check saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+        }
+    </script>
+</body>
+</html>
